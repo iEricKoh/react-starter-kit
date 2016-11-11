@@ -46,6 +46,14 @@ if (PROD) {
     hot                : true,
     stats              : 'errors-only',
     historyApiFallback : true,
+
+    // Combining with an existing Koa server
+    proxy: {
+      '/api': {
+        target: `http://localhost:${PORT}`,
+        secure: false
+      }
+    }
   }) 
 
   // Webpack dev server
