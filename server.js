@@ -7,7 +7,7 @@ const staticCache = require('koa-static-cache')
 const routes      = require('./server/routes')
 
 // Constants
-const PORT = process.env.EXPOSE_PORT || 9090
+const PORT = process.env.EXPOSE_PORT || 8080
 
 // Env
 const PROD = process.env.NODE_ENV === 'production'
@@ -38,26 +38,34 @@ if (PROD) {
   const webpack          = require('webpack')
   const WebpackDevServer = require("webpack-dev-server")
   const config           = require('./webpack.config')()
-
-  const compiler = webpack(config)
-
-  var server = new WebpackDevServer(compiler, {
-    publicPath         : '/',
-    hot                : true,
-    stats              : 'errors-only',
-    historyApiFallback : true,
-
-    // Combining with an existing Koa server
-    proxy: {
-      '/api': {
-        target: `http://localhost:${PORT}`,
-        secure: false
-      }
+  const compiler         = webpack(config)
+  const middleware       = require('koa-webpack')
+  
+  app.use(middleware({
+    compiler: compiler,
+    dev: {
+      publicPath: '/',
+      stats: 'errors-only',
+      historyApiFallback: true
     }
-  }) 
+  }))
 
-  // Webpack dev server
-  server.listen(8080)
+  //var server = new WebpackDevServer(compiler, {
+  //  publicPath         : '/',
+  //  hot                : true,
+  //  stats              : 'errors-only',
+  //  historyApiFallback : true,
+
+  //  // Combining with an existing Koa server
+  //  proxy: {
+  //    '/api': {
+  //      target: `http://localhost:${PORT}`,
+  //      secure: false
+  //    }
+  //  }
+  //}) 
+  //// Webpack dev server
+  //server.listen(8080)
 }
 
 // Routes
