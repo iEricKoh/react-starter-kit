@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styles from './App.css'
 
 const App = () => (
   <div className={styles.app}>
-    <h2>Hello, world</h2>
+    <h2 className={styles.heading}>Hello, world</h2>
   </div>
 )
 

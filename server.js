@@ -4,7 +4,9 @@ const bodyParser  = require('koa-bodyparser')
 const send        = require('koa-send')
 const serve       = require('koa-static')
 const staticCache = require('koa-static-cache')
+const logger      = require('koa-logger')
 const routes      = require('./server/routes')
+//const models      = require('./server/models')
 
 // Constants
 const PORT = process.env.EXPOSE_PORT || 8080
@@ -14,7 +16,11 @@ const PROD = process.env.NODE_ENV === 'production'
 
 const app = new Koa()
 
+app.use(logger())
 app.use(bodyParser())
+
+// Routes
+app.use(routes)
 
 // Production
 if (PROD) {
@@ -65,11 +71,10 @@ if (PROD) {
   //  }
   //}) 
   //// Webpack dev server
-  //server.listen(8080)
+  //server.listen(8090)
 }
 
-// Routes
-app.use(routes)
+//models.sequelize.sync()
 
 // Koa server
 app.listen(PORT)

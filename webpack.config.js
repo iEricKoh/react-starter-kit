@@ -15,7 +15,7 @@ const PATHS = {
     path.join(__dirname, 'assets', 'styles', 'styles.css')
   ],
   build : path.join(__dirname, 'dist'),
-  //hotEntry: ['react-hot-loader/patch', 'webpack-dev-server/client?http://localhost:8080', 'webpack/hot/only-dev-server']
+  //hotEntry: ['react-hot-loader/patch', 'webpack-dev-server/client?http://localhost:8090', 'webpack/hot/only-dev-server']
   hotEntry: ['react-hot-loader/patch', 'webpack-hot-middleware/client']
 }
 
@@ -31,7 +31,10 @@ module.exports = options => {
       app: [].concat(PROD ? PATHS.app : [...PATHS.hotEntry, PATHS.app]),
 
       // Loading dependencies to a vendor Bundle Automatically
-      vendor: Object.keys(pkg.dependencies),
+      vendor: ['react', 'react-dom', 'axios'],
+
+      // Polyfills
+      polyfills: ['babel-polyfill'],
 
       // Style entry 
       style: PATHS.style
@@ -79,7 +82,7 @@ module.exports = options => {
       }),
 
       new webpack.optimize.CommonsChunkPlugin({
-        name: ['app', 'vendor', 'style'],
+        name: ['app', 'vendor', 'style', 'polyfills'],
         minChunks: Infinity
       }),
 
@@ -111,16 +114,16 @@ module.exports = options => {
       : 
       // Development
       [
-        new BrowserSyncPlugin(
-          {
-            host: 'localhost',
-            port: 4000,
-            proxy: 'http://localhost:8080/'
-          },
-          {
-            reload: false
-          }
-        ),
+        //new BrowserSyncPlugin(
+        //  {
+        //    host: 'localhost',
+        //    port: 4000,
+        //    proxy: 'http://localhost:8080/'
+        //  },
+        //  {
+        //    reload: false
+        //  }
+        //),
         new webpack.HotModuleReplacementPlugin()
       ]
     )
