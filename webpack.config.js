@@ -65,7 +65,7 @@ module.exports = options => {
           }],
           include: PATHS.app
         }
-      ].concat(PROD ? [extractStyle()] : [inlineStyle()])
+      ].concat(PROD ? [...extractStyle()] : [...inlineStyle()])
     },
 
     plugins: [
@@ -131,18 +131,28 @@ module.exports = options => {
 }
 
 const extractStyle = () => {
-  return {
+  // Component style with css modules
+  return [{
     test: /\.css$/, 
     loader: ExtractTextPlugin.extract({
       fallbackLoader : "style-loader",
       loader         : ["css-loader?modules", "postcss-loader?parser=postcss-scss"]
     }),
-    include: [PATHS.app, PATHS.style]
-  }
+    include: [PATHS.app]
+  }, {
+    // Global style without css modules
+    test: /\.css$/, 
+    loader: ExtractTextPlugin.extract({
+      fallbackLoader : "style-loader",
+      loader         : ["css-loader", "postcss-loader?parser=postcss-scss"]
+    }),
+    include: [PATHS.style]
+  }]
 }
 
 const inlineStyle = () => {
-  return {
+  return [{
+    // Component style with css modules
     test: /\.css$/,
     use: [
       'style-loader',
@@ -159,6 +169,20 @@ const inlineStyle = () => {
         query: { parser: 'postcss-scss' }
       }
     ],
-    include: [PATHS.app, PATHS.style]
-  }
+    include: [PATHS.app]
+  }, {
+    // Global style without css modules
+    test: /\.css$/,
+    use: [
+      'style-loader',
+      {
+        loader : 'css-loader',
+      },
+      {
+        loader: 'postcss-loader',
+        query: { parser: 'postcss-scss' }
+      }
+    ],
+    include: [PATHS.style]
+  }]
 }
