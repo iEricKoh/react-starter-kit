@@ -148,7 +148,11 @@ const inlineStyle = () => {
       'style-loader',
       {
         loader : 'css-loader',
-        query  : { modules: true }
+        query  : { 
+          modules: true,
+          importLoaders: 1,
+          localIdentName: '[local]___[hash:base64:5]'
+        }
       },
       {
         loader: 'postcss-loader',
