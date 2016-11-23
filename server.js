@@ -1,11 +1,11 @@
-const Koa         = require('koa')
-const path        = require('path')
-const bodyParser  = require('koa-bodyparser')
-const send        = require('koa-send')
-const serve       = require('koa-static')
-const staticCache = require('koa-static-cache')
-const logger      = require('koa-logger')
-const router = require('./server/routes')
+const Koa              = require('koa')
+const path             = require('path')
+const bodyParser       = require('koa-bodyparser')
+const send             = require('koa-send')
+const serve            = require('koa-static')
+const staticCache      = require('koa-static-cache')
+const logger           = require('koa-logger')
+const router           = require('./server/routes')
 const { pageNotFound } = require('./server/middlewares')
 
 // Constants
@@ -44,33 +44,16 @@ if (PROD) {
   const config           = require('./webpack.config')()
   const compiler         = webpack(config)
 
-  //const middleware       = require('koa-webpack')
-  //
-  //app.use(middleware({
-  //  compiler: compiler,
-  //  dev: {
-  //    publicPath: '/',
-  //    stats: 'errors-only',
-  //    historyApiFallback: true
-  //  }
-  //}))
-
-  const server = new WebpackDevServer(compiler, {
-    publicPath         : '/',
-    hot                : true,
-    stats              : 'errors-only',
-    historyApiFallback : true,
-
-    // Combining with an existing Koa server
-    proxy: {
-      '/api': {
-        target: `http://localhost:${PORT}`,
-        secure: false
-      }
+  const middleware       = require('koa-webpack')
+  
+  app.use(middleware({
+    compiler: compiler,
+    dev: {
+      publicPath: '/',
+      stats: 'errors-only',
+      historyApiFallback: true
     }
-  }) 
-  // Webpack dev server
-  server.listen(3000)
+  }))
 }
 
 app.use(router.routes(), router.allowedMethods())
