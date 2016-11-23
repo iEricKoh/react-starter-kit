@@ -5,11 +5,12 @@ const send        = require('koa-send')
 const serve       = require('koa-static')
 const staticCache = require('koa-static-cache')
 const logger      = require('koa-logger')
-const routes      = require('./server/routes')
-//const models      = require('./server/models')
+const router = require('./server/routes')
+const { pageNotFound } = require('./server/middlewares')
 
 // Constants
 const PORT = process.env.EXPOSE_PORT || 8080
+const HOSTNAME = process.env.HOSTNAME || 'localhost'
 
 // Env
 const PROD = process.env.NODE_ENV === 'production'
@@ -18,9 +19,6 @@ const app = new Koa()
 
 app.use(logger())
 app.use(bodyParser())
-
-// Routes
-app.use(routes)
 
 // Production
 if (PROD) {
@@ -45,38 +43,42 @@ if (PROD) {
   const WebpackDevServer = require("webpack-dev-server")
   const config           = require('./webpack.config')()
   const compiler         = webpack(config)
-  const middleware       = require('koa-webpack')
-  
-  app.use(middleware({
-    compiler: compiler,
-    dev: {
-      publicPath: '/',
-      stats: 'errors-only',
-      historyApiFallback: true
-    }
-  }))
 
-  //var server = new WebpackDevServer(compiler, {
-  //  publicPath         : '/',
-  //  hot                : true,
-  //  stats              : 'errors-only',
-  //  historyApiFallback : true,
-
-  //  // Combining with an existing Koa server
-  //  proxy: {
-  //    '/api': {
-  //      target: `http://localhost:${PORT}`,
-  //      secure: false
-  //    }
+  //const middleware       = require('koa-webpack')
+  //
+  //app.use(middleware({
+  //  compiler: compiler,
+  //  dev: {
+  //    publicPath: '/',
+  //    stats: 'errors-only',
+  //    historyApiFallback: true
   //  }
-  //}) 
-  //// Webpack dev server
-  //server.listen(8090)
+  //}))
+
+  const server = new WebpackDevServer(compiler, {
+    publicPath         : '/',
+    hot                : true,
+    stats              : 'errors-only',
+    historyApiFallback : true,
+
+    // Combining with an existing Koa server
+    proxy: {
+      '/api': {
+        target: `http://localhost:${PORT}`,
+        secure: false
+      }
+    }
+  }) 
+  // Webpack dev server
+  server.listen(3000)
 }
 
-//models.sequelize.sync()
+app.use(router.routes(), router.allowedMethods())
+app.use(pageNotFound)
 
 // Koa server
-app.listen(PORT)
+app.listen(PORT, () => {
+  console.log('==> 🌎  Server is up at http://%s:%s ===', HOSTNAME, PORT)
+})
 
 module.exports = app
