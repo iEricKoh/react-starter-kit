@@ -1,18 +1,15 @@
+const Boom = require('boom')
+
 export const pageNotFound = async (ctx, next) => {
   await next()
+  ctx.body = Boom.notFound('Page Not Found').output
+}
 
-  switch (ctx.accepts('html', 'json')) {
-    case 'html':
-      ctx.type = 'html'
-      ctx.body = '<p>Page Not Found</p>'
-      break
-    case 'json':
-      ctx.body = {
-        message: 'Page Not Found'
-      }
-      break
-    default:
-      ctx.type = 'text'
-      ctx.body = 'Page Not Found'
+export const errorHandling = async (ctx, next) => {
+  try {
+    await next()
+  } catch(err) {
+    ctx.status = ctx.status || 503
+    ctx.body = Boom.serverUnavailable('unavailable').output
   }
 }

@@ -6,7 +6,7 @@ const serve            = require('koa-static')
 const staticCache      = require('koa-static-cache')
 const logger           = require('koa-logger')
 const router           = require('./server/routes')
-const { pageNotFound } = require('./server/middlewares')
+const { pageNotFound, errorHandling } = require('./server/middlewares')
 
 // Constants
 const PORT = process.env.EXPOSE_PORT || 8080
@@ -19,6 +19,7 @@ const app = new Koa()
 
 app.use(logger())
 app.use(bodyParser())
+app.use(errorHandling)
 
 // Production
 if (PROD) {

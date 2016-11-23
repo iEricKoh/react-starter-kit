@@ -9,7 +9,7 @@ router.get('/', async(ctx, next) => {
 })
 
 router.post('/', async(ctx, next) => {
-  ctx.body = {user: 'post eric'}
+  ctx.body = {users: 'post eric'}
 })
 
 module.exports = router
