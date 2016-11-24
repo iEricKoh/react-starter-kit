@@ -21,7 +21,7 @@ const PATHS = {
 
 module.exports = options => {
 
-  const PROD = options && options.production
+  const PROD = !!(options && options.production)
 
   return {
     context: resolve(__dirname, 'src'),
@@ -60,7 +60,7 @@ module.exports = options => {
           use  : [{
             loader: 'babel-loader',
             query: {
-              cacheDirectory: PROD ? false : true,
+              cacheDirectory: !PROD
             }
           }],
           include: PATHS.app
@@ -74,20 +74,16 @@ module.exports = options => {
           context: __dirname,
           postcss: () => [smartImport, autoprefixer, precss]
         },
-        debug    : PROD ? false: true,
-        minimize : PROD ? true : false
+        debug    : !PROD,
+        minimize : PROD
       }),
 
-      new HtmlWebpackPlugin({
-        template: 'index.html',
-      }),
+      new HtmlWebpackPlugin({ template: 'index.html' }),
 
       new webpack.optimize.CommonsChunkPlugin({
         name: ['app', 'vendor', 'style', 'polyfills'],
         minChunks: Infinity
-      }),
-
-      new webpack.NamedModulesPlugin(),
+      })
 
     ].concat(PROD ? 
       // Production
@@ -115,6 +111,8 @@ module.exports = options => {
       : 
       // Development
       [
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin()
         //new BrowserSyncPlugin(
         //  {
         //    host: 'localhost',
@@ -125,7 +123,6 @@ module.exports = options => {
         //    reload: false
         //  }
         //),
-        new webpack.HotModuleReplacementPlugin()
       ]
     )
   }
