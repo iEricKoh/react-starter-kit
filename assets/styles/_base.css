@@ -1,3 +1,13 @@
-html, body {
+html {
+  text-rendering: optimizeLegibility;
+}
+
+html, body, #root {
   height: 100%;
+}
+
+[data-reactroot] {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
 }

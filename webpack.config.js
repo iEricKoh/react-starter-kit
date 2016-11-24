@@ -15,7 +15,8 @@ const PATHS = {
     path.join(__dirname, 'assets', 'styles', 'styles.css')
   ],
   build : path.join(__dirname, 'dist'),
-  hotEntry: ['react-hot-loader/patch', 'webpack-hot-middleware/client']
+  hotEntry: ['react-hot-loader/patch', 'webpack-dev-server/client?http://localhost:3000', 'webpack/hot/only-dev-server']
+  //hotEntry: ['react-hot-loader/patch', 'webpack-hot-middleware/client']
 }
 
 module.exports = options => {
@@ -70,6 +71,7 @@ module.exports = options => {
     plugins: [
       new webpack.LoaderOptionsPlugin({
         options: {
+          context: __dirname,
           postcss: () => [smartImport, autoprefixer, precss]
         },
         debug    : PROD ? false: true,
@@ -135,7 +137,7 @@ const extractStyle = () => {
     test: /\.css$/, 
     loader: ExtractTextPlugin.extract({
       fallbackLoader : "style-loader",
-      loader         : ["css-loader?modules", "postcss-loader?parser=postcss-scss"]
+      loader         : ["css-loader?modules&importLoaders=1&localIdentName=[hash:base64:5]", "postcss-loader?parser=postcss-scss"]
     }),
     include: [PATHS.app]
   }, {
@@ -160,7 +162,7 @@ const inlineStyle = () => {
         query  : { 
           modules: true,
           importLoaders: 1,
-          localIdentName: '[local]___[hash:base64:5]'
+          localIdentName: '[folder]___[local]___[hash:base64:5]'
         }
       },
       {

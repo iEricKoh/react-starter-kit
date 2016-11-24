@@ -1,0 +1,20 @@
+.btn {
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: normal;
+  font-weight: 300;
+  cursor: pointer;
+  border-radius: 2px;
+  border: none;
+  color: inherit;
+  background-color: hsla(31,15%,50%,.15);
+  padding: .6rem 1rem;
+  display: inline-block;
+  transition: background-color .2s;
+
+  &:active, &:focus, &:hover {
+    outline: none;
+    background-color: hsla(31,15%,50%,.25);
+    text-decoration: none;
+  }
+}

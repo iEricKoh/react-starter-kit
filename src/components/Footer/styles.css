@@ -1,0 +1,10 @@
+.footer {
+  flex: none;
+}
+
+.inner {
+  padding: 1.5rem;
+  text-align: center;
+  color: #999;
+  background-color: #404040;
+}

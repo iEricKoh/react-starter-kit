@@ -1,13 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
-
-import App from './components/App'
+import React                      from 'react'
+import ReactDOM                   from 'react-dom'
+import { AppContainer }           from 'react-hot-loader'
+import { Router, browserHistory } from 'react-router'
+import routes                     from './routes'
 
 const render = () => {
   ReactDOM.render(
     <AppContainer>
-      <App/>
+      <Router history={browserHistory} routes={routes} />
     </AppContainer>,
     document.getElementById('root')
   )

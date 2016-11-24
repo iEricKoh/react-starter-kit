@@ -45,16 +45,33 @@ if (PROD) {
   const config           = require('./webpack.config')()
   const compiler         = webpack(config)
 
-  const middleware       = require('koa-webpack')
-  
-  app.use(middleware({
-    compiler: compiler,
-    dev: {
-      publicPath: '/',
-      stats: 'errors-only',
-      historyApiFallback: true
+  const server = new WebpackDevServer(compiler, {
+    publicPath         : '/',
+    hot                : true,
+    stats              : 'errors-only',
+    historyApiFallback : true,
+
+    // Combining with an existing Koa server
+    proxy: {
+      '/api': {
+        target: `http://localhost:${PORT}`,
+        secure: false
+      }
     }
-  }))
+  })
+
+  server.listen(3000)
+
+  //const middleware       = require('koa-webpack')
+  //
+  //app.use(middleware({
+  //  compiler: compiler,
+  //  dev: {
+  //    publicPath: '/',
+  //    stats: 'errors-only',
+  //    historyApiFallback: true
+  //  }
+  //}))
 }
 
 app.use(router.routes(), router.allowedMethods())

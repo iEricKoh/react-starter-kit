@@ -1,0 +1,54 @@
+.header {
+  flex: none;
+}
+
+.inner {
+  padding: 1.5rem;
+  background-color: hsla(31,15%,50%,.1);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .inner {
+    display: flex;  
+    align-items: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .brand {
+    align-items: baseline;
+    display: flex;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+}
+
+@media (min-width: 384px) {
+  .actions {
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .actions {
+    flex: 1;
+    justify-content: flex-end;
+  }
+}
+
+.action:first-child {
+  margin: 0 0 1rem;
+}
+
+@media (min-width: 384px) {
+  .action:first-child {
+    margin: 0 1rem 0 0;
+  }
+}
