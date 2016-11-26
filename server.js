@@ -1,11 +1,14 @@
-const Koa              = require('koa')
-const path             = require('path')
-const bodyParser       = require('koa-bodyparser')
-const send             = require('koa-send')
-const serve            = require('koa-static')
-const staticCache      = require('koa-static-cache')
-const logger           = require('koa-logger')
-const router           = require('./server/routes')
+const Koa                             = require('koa')
+const path                            = require('path')
+const bodyParser                      = require('koa-bodyparser')
+const send                            = require('koa-send')
+const serve                           = require('koa-static')
+const staticCache                     = require('koa-static-cache')
+const logger                          = require('koa-logger')
+const faker                           = require('faker')
+const _                               = require('lodash')
+const router                          = require('./server/routes')
+const models                          = require('./server/models')
 const { pageNotFound, errorHandling } = require('./server/middlewares')
 
 // Constants
@@ -76,6 +79,22 @@ if (PROD) {
 
 app.use(router.routes(), router.allowedMethods())
 app.use(pageNotFound)
+
+models.sequelize.sync({force: true})
+  .then(() => {
+    _.times(10, () => {
+      return models.person.create({
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        email: faker.internet.email()
+      }).then(person => {
+        return person.createPost({
+          title: `Sample title by ${person.firstName}`,
+          content: 'This is a sample article'
+        })
+      })
+    })
+  })
 
 // Koa server
 app.listen(PORT, () => {

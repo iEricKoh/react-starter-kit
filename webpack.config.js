@@ -6,7 +6,7 @@ const autoprefixer      = require('autoprefixer')
 const precss            = require('precss')
 const smartImport       = require("postcss-smart-import")
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-var BrowserSyncPlugin   = require('browser-sync-webpack-plugin')
+const BrowserSyncPlugin   = require('browser-sync-webpack-plugin')
 const pkg               = require('./package.json')
 
 const PATHS = {

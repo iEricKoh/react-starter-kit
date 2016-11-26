@@ -4,9 +4,9 @@ const Sequelize = require('sequelize')
 const basename  = path.basename(module.filename)
 
 const db        = {}
-const DB_NAME   = process.env.POSTGRES_DB || 'testdb'
-const DB_USER   = process.env.POSTGRES_USER || 'eric'
-const DB_PASSWD = process.env.POSTGRES_PASSWORD || ''
+const DB_NAME   = process.env.POSTGRES_DB || 'relay'
+const DB_USER   = process.env.POSTGRES_USER || 'postgres'
+const DB_PASSWD = process.env.POSTGRES_PASSWORD || 'postgres'
 
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWD, {
   host: 'localhost',
@@ -33,12 +33,12 @@ fs
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js')
   })
   .forEach(function(file) {
-    const model = sequelize['import'](path.join(__dirname, file))
+    const model = sequelize.import(path.join(__dirname, file))
     db[model.name] = model
   })
 
 Object.keys(db).forEach(function(modelName) {
-  if (db[modelName].associate) {
+  if ("associate" in db[modelName]) {
     db[modelName].associate(db)
   }
 })
