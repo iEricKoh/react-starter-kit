@@ -23,6 +23,7 @@ const app = new Koa()
 app.use(logger())
 app.use(bodyParser())
 app.use(errorHandling)
+app.use(router.routes(), router.allowedMethods())
 
 // Production
 if (PROD) {
@@ -45,40 +46,25 @@ if (PROD) {
 // Development
   const webpack          = require('webpack')
   const WebpackDevServer = require("webpack-dev-server")
+  const history = require('koa-connect-history-api-fallback')
   const config           = require('./webpack.config')()
   const compiler         = webpack(config)
 
-  const server = new WebpackDevServer(compiler, {
-    publicPath         : '/',
-    hot                : true,
-    stats              : 'errors-only',
-    historyApiFallback : true,
+  const middleware       = require('koa-webpack')
+  
+  // history fall back
+  app.use(history())
 
-    // Combining with an existing Koa server
-    proxy: {
-      '/api': {
-        target: `http://localhost:${PORT}`,
-        secure: false
-      }
+  app.use(middleware({
+    compiler: compiler,
+    dev: {
+      publicPath: '/',
+      stats: 'errors-only'
     }
-  })
-
-  server.listen(3000)
-
-  //const middleware       = require('koa-webpack')
-  //
-  //app.use(middleware({
-  //  compiler: compiler,
-  //  dev: {
-  //    publicPath: '/',
-  //    stats: 'errors-only',
-  //    historyApiFallback: true
-  //  }
-  //}))
+  }))
 }
 
-app.use(router.routes(), router.allowedMethods())
-app.use(pageNotFound)
+//app.use(pageNotFound)
 
 models.sequelize.sync({force: true})
   .then(() => {
