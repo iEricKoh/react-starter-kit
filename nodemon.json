@@ -1,0 +1,11 @@
+{
+  "execMap": {
+    "js": "babel-node",
+    "jsx": "babel-node"
+  },
+  "ext": "js jsx json",
+  "ignore": [
+    ".git/",
+    "node_modules/"
+  ]
+}
