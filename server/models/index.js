@@ -7,9 +7,10 @@ const db        = {}
 const DB_NAME   = process.env.POSTGRES_DB || 'relay'
 const DB_USER   = process.env.POSTGRES_USER || 'postgres'
 const DB_PASSWD = process.env.POSTGRES_PASSWORD || 'postgres'
+const DB_HOST   = process.env.POSTGRES_HOST || 'postgres'
 
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWD, {
-  host: 'localhost',
+  host: DB_HOST,
   dialect: 'postgres',
   pool: {
     max: 5,

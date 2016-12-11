@@ -6,7 +6,7 @@ const autoprefixer      = require('autoprefixer')
 const precss            = require('precss')
 const smartImport       = require("postcss-smart-import")
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const BrowserSyncPlugin   = require('browser-sync-webpack-plugin')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const pkg               = require('./package.json')
 
 const PATHS = {
@@ -15,7 +15,6 @@ const PATHS = {
     path.join(__dirname, 'assets', 'styles', 'styles.css')
   ],
   build : path.join(__dirname, 'dist'),
-  //hotEntry: ['react-hot-loader/patch', 'webpack-dev-server/client?http://localhost:3000', 'webpack/hot/only-dev-server']
   hotEntry: ['react-hot-loader/patch', 'webpack-hot-middleware/client']
 }
 
