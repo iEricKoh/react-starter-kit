@@ -25,6 +25,10 @@ module.exports = options => {
   return {
     context: resolve(__dirname, 'src'),
 
+    performance: {
+      hints: PROD ? "warning" : false
+    },
+
     entry: {
       // App entry
       app: [].concat(PROD ? PATHS.app : [...PATHS.hotEntry, PATHS.app]),
