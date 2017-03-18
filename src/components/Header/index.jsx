@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CSSModules from 'react-css-modules'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import styles from './styles.css'
 
 @CSSModules(styles)

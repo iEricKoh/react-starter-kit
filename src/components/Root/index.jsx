@@ -1,13 +1,23 @@
-import React, { Component }       from 'react'
-import { Router, browserHistory } from 'react-router'
-import routes                     from '../../routes'
+import React, { Component } from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+}                           from 'react-router-dom'
+import Home                 from '../Home'
+import About                from '../About'
+import App                  from '../App'
+import Inbox                from '../Inbox'
 
 class Root extends Component {
   render() {
-    if (!this.routes) this.routes = routes
-
     return (
-      <Router history={browserHistory} routes={this.routes} />
+      <Router>
+        <App>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/inbox" component={Inbox} />
+        </App>
+      </Router>
     )
   }
 }
