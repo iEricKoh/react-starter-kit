@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path              = require('path')
 const autoprefixer      = require('autoprefixer')
 const precss            = require('precss')
-const smartImport       = require("postcss-smart-import")
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const pkg               = require('./package.json')
@@ -75,7 +74,7 @@ module.exports = options => {
       new webpack.LoaderOptionsPlugin({
         options: {
           context: __dirname,
-          postcss: () => [smartImport, autoprefixer, precss]
+          postcss: () => [autoprefixer, precss]
         },
         debug    : !PROD,
         minimize : PROD
@@ -136,7 +135,7 @@ const extractStyle = () => {
   return [{
     test: /\.css$/, 
     loader: ExtractTextPlugin.extract({
-      fallbackLoader : "style-loader",
+      fallback: "style-loader",
       loader         : ["css-loader?modules&importLoaders=1&localIdentName=[hash:base64:5]", "postcss-loader?parser=postcss-scss"]
     }),
     include: [PATHS.app]
@@ -144,7 +143,7 @@ const extractStyle = () => {
     // Global style without css modules
     test: /\.css$/, 
     loader: ExtractTextPlugin.extract({
-      fallbackLoader : "style-loader",
+      fallback: "style-loader",
       loader         : ["css-loader", "postcss-loader?parser=postcss-scss"]
     }),
     include: [PATHS.style]
