@@ -97,6 +97,7 @@ module.exports = options => {
           output: {
             comments: false
           },
+          minimize: true,
           sourceMap: true
         }),
         new webpack.DefinePlugin({
@@ -136,7 +137,7 @@ const extractStyle = () => {
     test: /\.css$/, 
     loader: ExtractTextPlugin.extract({
       fallback: "style-loader",
-      loader         : ["css-loader?modules&importLoaders=1&localIdentName=[hash:base64:5]", "postcss-loader?parser=postcss-scss"]
+      use: ["css-loader?modules&importLoaders=1&localIdentName=[hash:base64:5]", "postcss-loader?parser=postcss-scss"]
     }),
     include: [PATHS.app]
   }, {
@@ -144,7 +145,7 @@ const extractStyle = () => {
     test: /\.css$/, 
     loader: ExtractTextPlugin.extract({
       fallback: "style-loader",
-      loader         : ["css-loader", "postcss-loader?parser=postcss-scss"]
+      use: ["css-loader", "postcss-loader?parser=postcss-scss"]
     }),
     include: [PATHS.style]
   }]
