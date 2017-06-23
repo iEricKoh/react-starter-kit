@@ -5,8 +5,7 @@ const path              = require('path')
 const autoprefixer      = require('autoprefixer')
 const precss            = require('precss')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
-const pkg               = require('./package.json')
+//const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
 const PATHS = {
   app   : path.join(__dirname, 'src'),
