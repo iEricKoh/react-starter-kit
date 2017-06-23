@@ -15,11 +15,9 @@ module.exports = function(sequelize, DataTypes) {
         isEmail: true
       }
     }
-  }, {
-    classMethods: {
-      associate: models => Person.hasMany(models.post)
-    }
   })
+
+  Person.associate = (models) => Person.hasMany(models.post)
 
   return Person
 }

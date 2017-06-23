@@ -8,11 +8,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     }
-  }, {
-    classMethods: {
-      associate: models => Post.belongsTo(models.person)
-    }
   })
+
+  Post.associate = (models) => Post.belongsTo(models.person)
 
   return Post
 }
