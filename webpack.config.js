@@ -115,7 +115,8 @@ module.exports = options => {
       // Development
       [
         new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin()
         //new BrowserSyncPlugin(
         //  {
         //    host: 'localhost',

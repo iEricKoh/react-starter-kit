@@ -59,7 +59,7 @@ if (PROD) {
     compiler: compiler,
     dev: {
       publicPath: '/',
-      stats: 'errors-only'
+      stats: 'errors-only',
     }
   }))
 }

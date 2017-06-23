@@ -3,17 +3,17 @@ import ReactDOM         from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import Root             from './components/Root'
 
-const render = () => {
+const render = Component => {
   ReactDOM.render(
     <AppContainer>
-      <Root />
+      <Component />
     </AppContainer>,
     document.getElementById('root')
   )
 }
 
-render()
+render(Root)
 
 if (module.hot) {
-  module.hot.accept(Root, render)
+  module.hot.accept('./components/Root', () => { render(Root) })
 }

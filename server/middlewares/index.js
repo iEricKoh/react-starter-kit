@@ -1,6 +1,7 @@
 const Boom = require('boom')
 
-export const pageNotFound = async (ctx, next) => {
+
+exports.pageNotFound = async (ctx, next) => {
   await next()
 
   const status = ctx.status || 404 
@@ -10,7 +11,7 @@ export const pageNotFound = async (ctx, next) => {
   }
 }
 
-export const errorHandling = async (ctx, next) => {
+exports.errorHandling = async (ctx, next) => {
   try {
     await next()
   } catch(err) {
