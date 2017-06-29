@@ -5,8 +5,8 @@ import Main   from '../Main'
 
 const Dashboard = (props) => (
   <div>
-    <Header {...props} />
-    <Main {...props} />
+    <Header { ...props } />
+    <Main { ...props } />
     <Footer />
   </div>
 )

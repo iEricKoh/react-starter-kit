@@ -1,11 +1,16 @@
-export const increment = () => {
+const increment = () => {
   return {
     type: 'INCREMENT'
   }
 }
 
-export const decrement = () => {
+const decrement = () => {
   return {
     type: 'DECREMENT'
   }
+}
+
+export {
+  increment,
+  decrement
 }
