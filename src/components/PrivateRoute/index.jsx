@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import React from 'react'
+import { Route, Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const fakeAuth = {
   isAuthenticated: false,
@@ -25,5 +26,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     )
   )}/>
 )
+
+PrivateRoute.propTypes = {
+  component: PropTypes.element,
+  location: PropTypes.object
+}
 
 export default PrivateRoute

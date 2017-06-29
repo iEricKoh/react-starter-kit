@@ -6,7 +6,7 @@ import About                       from '../About'
 import Inbox                       from '../Inbox'
 import Login                       from '../Login'
 import Home                        from '../Home'
-import NoMatch                     from '../NoMatch'
+import PropTypes from 'prop-types'
 
 @CSSModules(styles)
 class Main extends Component {
@@ -25,6 +25,10 @@ class Main extends Component {
       </main>
     )
   }
+}
+
+Main.propTypes = {
+  match: PropTypes.object
 }
 
 export default Main

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Counter = (props) => {
   return (
@@ -10,6 +11,13 @@ const Counter = (props) => {
       <button onClick={props.actions.decrement}>decrement</button>
     </div>
   )
+}
+
+Counter.propTypes = {
+  actions: PropTypes.object,
+  counter: PropTypes.number,
+  increment: PropTypes.func,
+  decrement: PropTypes.func
 }
 
 export default Counter

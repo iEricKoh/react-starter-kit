@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import CSSModules           from 'react-css-modules'
 import { Link }             from 'react-router-dom'
 import styles               from './styles.css'
+import PropTypes from 'prop-types'
 
 @CSSModules(styles)
-export default class Header extends Component {
+class Header extends Component {
   render() {
     const { match } = this.props
 
@@ -21,3 +22,9 @@ export default class Header extends Component {
     )
   }
 }
+
+Header.propTypes = {
+  match: PropTypes.object
+}
+
+export default Header

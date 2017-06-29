@@ -1,8 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 
 const InboxDetails = ({ match }) => {
   return <div>Inbox id: {match.params.id}</div>
+}
+
+InboxDetails.propTypes = {
+  match: PropTypes.object
 }
 
 const Inbox = ({ match }) => (
@@ -14,5 +19,9 @@ const Inbox = ({ match }) => (
     </Switch>
   </div>
 )
+
+Inbox.propTypes = {
+  match: PropTypes.object
+}
 
 export default Inbox

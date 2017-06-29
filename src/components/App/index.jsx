@@ -1,14 +1,10 @@
-import React, { Component } from 'react'
-import { Route, Switch }    from 'react-router-dom'
-import styles               from './App.css'
-import Home                 from '../Home'
-import Login                from '../Login'
-import PrivateRoute         from '../PrivateRoute'
-import NoMatch              from '../NoMatch'
-import Dashboard            from '../Dashboard'
-import Header               from '../Header'
-import Footer               from '../Footer'
-import Main                 from '../Main'
+import React             from 'react'
+import { Route, Switch } from 'react-router-dom'
+import Home              from '../Home'
+import Login             from '../Login'
+import PrivateRoute      from '../PrivateRoute'
+import NoMatch           from '../NoMatch'
+import Dashboard         from '../Dashboard'
 
 const App = () => (
   <Switch>

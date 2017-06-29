@@ -57,6 +57,14 @@ module.exports = options => {
     module: {
       rules: [
         {
+          enforce: 'pre',
+          test : /\.jsx?$/,
+          use  : [{
+            loader: 'eslint-loader',
+          }],
+          include: PATHS.app
+        },
+        {
           test : /\.jsx?$/,
           use  : [{
             loader: 'babel-loader',
