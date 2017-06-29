@@ -1,7 +1,11 @@
 import React from 'react'
+import CounterContainer from '../../containers/Counter'
 
 const Home = () => (
-  <h3>Home</h3>
+  <div>
+    <h3>Home</h3>
+    <CounterContainer />
+  </div>
 )
 
 export default Home
