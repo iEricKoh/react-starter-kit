@@ -12,11 +12,14 @@
   },
   "babel": {
     "presets": [
-      ["latest", {
-        "es2015": {
-          "modules": false
+      [
+        "latest",
+        {
+          "es2015": {
+            "modules": false
+          }
         }
-      }],
+      ],
       "react",
       "stage-1"
     ],
@@ -28,6 +31,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "bootstrap": "^4.0.0-alpha.6",
     "graphql": "^0.10.3",
     "koa": "next",
     "koa-bodyparser": "^4.2.0",
@@ -43,6 +47,8 @@
     "react-dom": "^15.6.1",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-transition-group": "^1.2.0",
+    "reactstrap": "^4.8.0",
     "sequelize": "^4.2.0"
   },
   "devDependencies": {
