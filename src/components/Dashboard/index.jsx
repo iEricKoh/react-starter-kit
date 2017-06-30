@@ -3,10 +3,10 @@ import Header from '../Header'
 import Footer from '../Footer'
 import Main   from '../Main'
 
-const Dashboard = (props) => (
+const Dashboard = () => (
   <div>
-    <Header { ...props } />
-    <Main { ...props } />
+    <Header />
+    <Main />
     <Footer />
   </div>
 )

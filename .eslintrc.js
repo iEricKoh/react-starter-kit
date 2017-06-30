@@ -47,6 +47,7 @@ module.exports = {
     "array-bracket-spacing": ["error", "never"],
     "camelcase": "error",
     "id-length": "error",
+    "no-console": ["error", { "allow": ["info", "warn", "error"] }],
     "linebreak-style": [
       "error",
       "unix"

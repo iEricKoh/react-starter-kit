@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 const fakeAuth = {
-  isAuthenticated: false,
+  isAuthenticated: true,
   authenticate(cb) {
     this.isAuthenticated = true
     setTimeout(cb, 100) // fake async
@@ -28,7 +28,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 )
 
 PrivateRoute.propTypes = {
-  component: PropTypes.element,
+  component: PropTypes.func,
   location: PropTypes.object
 }
 
