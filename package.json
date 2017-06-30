@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf ./dist",
-    "build": "npm run clean && webpack --progress --env.production --optimize-minimize",
+    "build": "npm run test && npm run clean && webpack --progress --env.production --optimize-minimize",
     "start": "NODE_ENV=production pm2 start ecosystem.config.js",
     "dev": "pm2-dev start ecosystem.config.js",
     "test": "NODE_ENV=test mocha --require babel-register ./src/**/*.test.js"
@@ -52,6 +52,7 @@
     "pg": "^6.4.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
@@ -96,7 +97,6 @@
     "postcss-scss": "^1.0.2",
     "precss": "^1.4.0",
     "react-css-modules": "^4.3.0",
-    "react-dom": "^15.6.1",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-test-renderer": "^15.6.1",
     "redux-devtools": "^3.4.0",
