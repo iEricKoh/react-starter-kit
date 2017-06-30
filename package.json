@@ -8,7 +8,7 @@
     "build": "npm run clean && webpack --progress --env.production --optimize-minimize",
     "start": "NODE_ENV=production pm2 start ecosystem.config.js",
     "dev": "pm2-dev start ecosystem.config.js",
-    "test": "mocha"
+    "test": "NODE_ENV=test mocha --require babel-register ./src/**/*.test.js"
   },
   "babel": {
     "presets": [
@@ -27,7 +27,14 @@
       "react-hot-loader/babel",
       "transform-async-to-generator",
       "transform-decorators-legacy"
-    ]
+    ],
+    "env": {
+      "test": {
+        "presets": [
+          "latest"
+        ]
+      }
+    }
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -45,7 +52,6 @@
     "pg": "^6.4.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
@@ -68,10 +74,13 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
+    "babel-register": "^6.24.1",
     "boom": "^5.1.0",
     "browser-sync": "^2.18.12",
     "browser-sync-webpack-plugin": "^1.1.4",
+    "chai": "^4.0.2",
     "css-loader": "^0.28.4",
+    "enzyme": "^2.9.1",
     "eslint": "^3.19.0",
     "eslint-loader": "^1.8.0",
     "eslint-plugin-react": "^7.1.0",
@@ -87,7 +96,9 @@
     "postcss-scss": "^1.0.2",
     "precss": "^1.4.0",
     "react-css-modules": "^4.3.0",
+    "react-dom": "^15.6.1",
     "react-hot-loader": "^3.0.0-beta.6",
+    "react-test-renderer": "^15.6.1",
     "redux-devtools": "^3.4.0",
     "rimraf": "^2.6.1",
     "style-loader": "^0.18.2",
