@@ -32,7 +32,7 @@ module.exports = options => {
       app: [].concat(PROD ? PATHS.app : [...PATHS.hotEntry, PATHS.app]),
 
       // Loading dependencies to a vendor Bundle Automatically
-      vendor: ['react', 'react-dom', 'axios'],
+      vendor: ['react', 'react-dom', 'axios', 'immutable'],
 
       // Polyfills
       polyfills: ['babel-polyfill'],

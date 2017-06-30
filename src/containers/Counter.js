@@ -6,7 +6,7 @@ import Counter from '../components/Counter'
 
 const mapStateToProps = (state) => {
   return {
-    counter: state.counter,
+    counter: state.get('counter'),
   }
 }
 
