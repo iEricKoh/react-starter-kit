@@ -16,6 +16,11 @@ const PATHS = {
   hotEntry: ['react-hot-loader/patch', 'webpack-hot-middleware/client']
 }
 
+const cssLoaderOptions = {
+  modules: true,
+  importLoaders: 1
+}
+
 module.exports = options => {
 
   const PROD = !!(options && options.production)
@@ -81,7 +86,7 @@ module.exports = options => {
       new webpack.LoaderOptionsPlugin({
         options: {
           context: __dirname,
-          postcss: () => [autoprefixer, precss]
+          //postcss: () => [autoprefixer, precss]
         },
         debug    : !PROD,
         minimize : PROD
@@ -145,7 +150,13 @@ const extractStyle = () => {
     test: /\.css$/, 
     loader: ExtractTextPlugin.extract({
       fallback: "style-loader",
-      use: ["css-loader?modules&importLoaders=1&localIdentName=[hash:base64:5]", "postcss-loader?parser=postcss-scss"]
+      use: [
+        {
+          loader  : 'css-loader',
+          options : Object.assign({}, cssLoaderOptions, {localIdentName: '[hash:base64:5]'})
+        },
+        'postcss-loader'
+      ]
     }),
     include: [PATHS.app]
   }, {
@@ -153,7 +164,7 @@ const extractStyle = () => {
     test: /\.css$/, 
     loader: ExtractTextPlugin.extract({
       fallback: "style-loader",
-      use: ["css-loader", "postcss-loader?parser=postcss-scss"]
+      use: ["css-loader", "postcss-loader"]
     }),
     include: [PATHS.style]
   }]
@@ -166,17 +177,10 @@ const inlineStyle = () => {
     use: [
       'style-loader',
       {
-        loader : 'css-loader',
-        query  : { 
-          modules: true,
-          importLoaders: 1,
-          localIdentName: '[folder]___[local]___[hash:base64:5]'
-        }
+        loader  : 'css-loader',
+        options : Object.assign({}, cssLoaderOptions, {localIdentName: '[folder]___[local]___[hash:base64:5]'})
       },
-      {
-        loader: 'postcss-loader',
-        query: { parser: 'postcss-scss' }
-      }
+      'postcss-loader'
     ],
     include: [PATHS.app]
   }, {
@@ -187,10 +191,7 @@ const inlineStyle = () => {
       {
         loader : 'css-loader',
       },
-      {
-        loader: 'postcss-loader',
-        query: { parser: 'postcss-scss' }
-      }
+      'postcss-loader'
     ],
     include: [PATHS.style]
   }]

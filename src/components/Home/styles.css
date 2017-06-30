@@ -1,0 +1,12 @@
+$color: red;
+
+@define-mixin box {
+  background-color: blue;
+}
+
+.home {
+  @mixin box;
+  font-size: 14px;
+  background-color: $color;
+
+}

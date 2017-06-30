@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf ./dist",
-    "build": "npm run test && npm run clean && webpack --progress --env.production --optimize-minimize",
+    "build": "npm run clean && webpack --progress --env.production --optimize-minimize",
     "start": "NODE_ENV=production pm2 start ecosystem.config.js",
     "dev": "pm2-dev start ecosystem.config.js",
     "test": "NODE_ENV=test mocha --require babel-register ./src/**/*.test.js"

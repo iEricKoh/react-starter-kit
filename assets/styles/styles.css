@@ -1,4 +1,4 @@
-@import "~normalize.css";
+@import "normalize.css";
 @import '_base.css';
 @import "_button.css";
-@import "~bootstrap/dist/css/bootstrap.css";
+@import "bootstrap/dist/css/bootstrap.css";
