@@ -41,7 +41,7 @@
     "bootstrap": "^4.0.0-alpha.6",
     "graphql": "^0.10.3",
     "immutable": "^3.8.1",
-    "koa": "next",
+    "koa": "^2.0.0-alpha.8",
     "koa-bodyparser": "^4.2.0",
     "koa-convert": "^1.2.0",
     "koa-graphql": "^0.7.1",
@@ -50,7 +50,8 @@
     "koa-send": "^4.1.0",
     "koa-static": "^3.0.0",
     "koa-static-cache": "^5.1.1",
-    "pg": "^6.4.0",
+    "pg": "^6.4.1",
+    "pg-hstore": "^2.3.2",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -61,7 +62,7 @@
     "reactstrap": "^4.8.0",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
-    "sequelize": "^4.2.1"
+    "sequelize": "^4.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
@@ -94,6 +95,9 @@
     "lodash": "^4.17.4",
     "mocha": "^3.4.2",
     "normalize.css": "^7.0.0",
+    "pm2": "^2.5.0",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.6",
     "postcss-scss": "^1.0.2",
     "precss": "^1.4.0",
