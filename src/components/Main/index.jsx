@@ -1,6 +1,5 @@
 import React, { Component }        from 'react'
-import CSSModules                  from 'react-css-modules'
-import styles                      from './styles.css'
+import './styles.css'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import About                       from '../About'
 import Inbox                       from '../Inbox'
@@ -10,7 +9,6 @@ import PropTypes                   from 'prop-types'
 import { withRouter }              from 'react-router-dom'
 
 @withRouter
-@CSSModules(styles)
 class Main extends Component {
   render() {
     const { match } = this.props

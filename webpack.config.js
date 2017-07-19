@@ -74,7 +74,17 @@ module.exports = options => {
           use  : [{
             loader: 'babel-loader',
             query: {
-              cacheDirectory: !PROD
+              cacheDirectory: !PROD,
+              plugins: [
+                'transform-react-jsx',
+                [
+                  'react-css-modules',
+                  {
+                    generateScopedName: PROD ? '[hash:base64:5]' : '[folder]___[local]___[hash:base64:5]',
+                    webpackHotModuleReloading: true
+                  }
+                ]
+              ]
             }
           }],
           include: PATHS.app
